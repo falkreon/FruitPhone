@@ -64,7 +64,6 @@ fruitphone.color.FF00FF=Programmer Purple
 fruitphone.color.0000FF=Programmer Blue
 fruitphone.color.FFFF00=Programmer Yellow
 
-
 fruitphone.furnace.fuel=Fuel
 fruitphone.furnace.progress=Progress
 
@@ -110,6 +109,8 @@ fruitphone.beacon.secondary=Secondary: %s %s
 fruitphone.beacon.none=None
 
 fruitphone.mobSpawner.title=%1$s %2$s
+fruitphone.mobSpawner.mob=Spawns: %sx %s
+fruitphone.mobSpawner.timeLeft=Time Left
 
 fruitphone.gui.snapToGuides=Snap to Guides
 fruitphone.gui.clampRegion=Clamp Region

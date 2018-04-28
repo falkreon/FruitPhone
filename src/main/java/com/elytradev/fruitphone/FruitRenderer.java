@@ -56,6 +56,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -262,6 +263,29 @@ public class FruitRenderer {
 		if (pickblock != null && !pickblock.isEmpty()) {
 			ident.withInventory(ImmutableList.of(pickblock));
 			ident.withLabel(pickblock.getDisplayName());
+		} else {
+			//No pickblock, but maybe we can get some helpful information
+			try {
+				Item maybeItem = Item.getItemFromBlock(b.getBlock());
+				if (maybeItem!=null) {
+					ItemStack item = new ItemStack(maybeItem);
+					String label;
+					if (!item.isEmpty()) {
+						ident.withInventory(ImmutableList.of(item));
+						ident.withLabel(item.getDisplayName());
+					} else {
+						String translationKey = ""+b.getBlock().getUnlocalizedName()+".name";
+						if (translationKey.equals("tile.null.name")) {
+							ident.withLabel(b.getBlock().getClass().getSimpleName());
+							//ident.withLabel(new TextComponentTranslation("fruitphone.tile.null.name"));
+						} else {
+							ident.withLabel(new TextComponentTranslation(translationKey));
+						}
+					}
+				}
+			} catch (Exception e) {
+				//ident.withLabel(e.toString()); //Capture the error so we can debug
+			}
 		}
 		newData.add(ident);
 		boolean first = true;
